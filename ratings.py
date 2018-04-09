@@ -14,8 +14,10 @@ def print_sorted_ratings(filename=sys.argv[1]):
 
     # create sorted list of items within restaurant_ratings dictionary
     sorted_ratings = sorted(restaurant_ratings.items())
-    print sorted_ratings
     # print restaurant and rating statements
+    for record in sorted_ratings:
+        restaurant, rating = record
+        print "%s is rated at %d." % (restaurant, int(rating))
 
 
 print_sorted_ratings()
