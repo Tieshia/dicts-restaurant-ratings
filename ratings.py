@@ -46,4 +46,27 @@ def print_restaurant_ratings():
     print_sorted_ratings(restaurant_ratings)
 
 
-print_restaurant_ratings()
+def give_user_choices():
+    print "Welcome to the restaurant rater! How would you like to proceed?"
+    user_choice = None
+    restaurant_ratings = create_restaurant_ratings()
+
+    while user_choice != 3:
+        print
+        print "\t1. See all the ratings (in alphabetical order)"
+        print "\t2. Add a new restaurant (and rating it)"
+        print "\t3. Quit"
+
+        user_choice = int(raw_input(">>> "))
+
+        if user_choice == 3:
+            break
+        elif user_choice == 1:
+            print_sorted_ratings(restaurant_ratings)
+        else:
+            restaurant_ratings = input_new_restaurant_rating(restaurant_ratings)
+
+    print "Thank you for rating restaurants!"
+
+
+give_user_choices()
