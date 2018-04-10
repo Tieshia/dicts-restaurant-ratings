@@ -101,7 +101,7 @@ while True:
         restaurant_ratings = create_restaurant_ratings(file_choice)
 
 print "Thank you for rating restaurants!"
-sys.exit("Goodbye!")
+# sys.exit("Goodbye!")
 
 
 
