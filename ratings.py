@@ -1,5 +1,6 @@
 import sys
 import random
+import os
 
 
 def create_restaurant_ratings(filename=sys.argv[1]):
@@ -27,9 +28,9 @@ def print_sorted_ratings(restaurant_ratings):
         print "%s is rated at %d." % (restaurant, rating)
 
 
-def input_new_restaurant_rating(restaurant_ratings):
+def input_restaurant_rating(restaurant_ratings):
     # ask user for new restaurant and rating
-    restaurant = raw_input('Enter a new restaurant name: ')
+    restaurant = raw_input('Enter a restaurant name: ')
     rating = None
 
     while rating is None or rating < 1 or rating > 5:
@@ -43,7 +44,7 @@ def input_new_restaurant_rating(restaurant_ratings):
 
 def print_restaurant_ratings():
     restaurant_ratings = create_restaurant_ratings()
-    restaurant_ratings = input_new_restaurant_rating(restaurant_ratings)
+    restaurant_ratings = input_restaurant_rating(restaurant_ratings)
     print_sorted_ratings(restaurant_ratings)
 
 
@@ -63,13 +64,20 @@ def update_random_restaurant(restaurant_ratings):
 
 
 # def give_user_choices():
-print "Welcome to the restaurant rater! How would you like to proceed?"
+print "Welcome to the restaurant rater! What file would you like to open"
+for option, filename in enumerate(os.listdir("/home/user/src/dicts-restaurant-ratings")):
+    print option, filename  # print list of files in directory os.listdir("/home/user/src/dicts-restaurant-ratings")
+
+# check if file exits os.path.isfile("/home/user/src/dicts-restaurant-ratings/scores.txt")
+
+# ask user which file to open
+
 restaurant_ratings = create_restaurant_ratings()
 
 while True:
     print
     print "\t1. See all the ratings (in alphabetical order)"
-    print "\t2. Add a new restaurant (and rating it)"
+    print "\t2. Add/update a restaurant (and rate it)"
     print "\t3. Quit"
     print "\t4. Update the rating for a random restaurant."
 
@@ -80,13 +88,13 @@ while True:
     if user_choice == 1:
         print_sorted_ratings(restaurant_ratings)
     elif user_choice == 2:
-        restaurant_ratings = input_new_restaurant_rating(restaurant_ratings)
+        restaurant_ratings = input_restaurant_rating(restaurant_ratings)
     else:
         restaurant_ratings = update_random_restaurant(restaurant_ratings)
 
 print "Thank you for rating restaurants!"
 
-
+sys.exit()
 
 
 
