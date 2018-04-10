@@ -3,7 +3,7 @@ import random
 import os
 
 
-def create_restaurant_ratings(filename=sys.argv[1]):
+def create_restaurant_ratings(filename):
     """Restaurant rating lister."""
 
     restaurant_ratings = {}  # initialize restaurant_ratings dictionary
@@ -63,16 +63,20 @@ def update_random_restaurant(restaurant_ratings):
     return restaurant_ratings
 
 
-# def give_user_choices():
-print "Welcome to the restaurant rater! What file would you like to open"
-for option, filename in enumerate(os.listdir("/home/user/src/dicts-restaurant-ratings")):
-    print option, filename  # print list of files in directory os.listdir("/home/user/src/dicts-restaurant-ratings")
+def choose_file():
+    print "Welcome to the restaurant rater! What file would you like to open"
+    for option, filename in enumerate(os.listdir(".")):
+        print option + 1, filename  # print list of files in directory os.listdir("/home/user/src/dicts-restaurant-ratings")
+  
+    while True:
+        file_choice = raw_input('Enter the file name you would like to use: ')  # ask user which file to open
 
-# check if file exits os.path.isfile("/home/user/src/dicts-restaurant-ratings/scores.txt")
+        if os.path.isfile(file_choice):
+            return file_choice
+        # check if file exits os.path.isfile("/home/user/src/dicts-restaurant-ratings/scores.txt")
 
-# ask user which file to open
 
-restaurant_ratings = create_restaurant_ratings()
+restaurant_ratings = create_restaurant_ratings(choose_file())
 
 while True:
     print
@@ -80,6 +84,7 @@ while True:
     print "\t2. Add/update a restaurant (and rate it)"
     print "\t3. Quit"
     print "\t4. Update the rating for a random restaurant."
+    print "\t5. Open a different file."
 
     user_choice = int(raw_input(">>> "))
 
@@ -89,12 +94,14 @@ while True:
         print_sorted_ratings(restaurant_ratings)
     elif user_choice == 2:
         restaurant_ratings = input_restaurant_rating(restaurant_ratings)
-    else:
+    elif user_choice == 4:
         restaurant_ratings = update_random_restaurant(restaurant_ratings)
+    else:
+        file_choice = choose_file()
+        restaurant_ratings = create_restaurant_ratings(file_choice)
 
 print "Thank you for rating restaurants!"
-
-sys.exit()
+sys.exit("Goodbye!")
 
 
 

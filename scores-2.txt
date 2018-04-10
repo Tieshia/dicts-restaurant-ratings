@@ -1,0 +1,4 @@
+Chili's:4
+McDonald's:1
+Burger King:3
+In-N-Out:5
