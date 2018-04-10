@@ -47,6 +47,21 @@ def print_restaurant_ratings():
     print_sorted_ratings(restaurant_ratings)
 
 
+def update_random_restaurant(restaurant_ratings):
+    # random.choice to pick a restaurant
+    random_restaurant = random.choice(restaurant_ratings.keys())
+    rating = None
+    # print choice out to user
+    print "Provide an updated rating for {}.".format(random_restaurant)
+    # ask user to update rating
+    while rating is None or rating < 1 or rating > 5:
+        rating = int(raw_input('Rate the restaurant between 1 and 5: '))
+    # update rating in dictionary
+    restaurant_ratings[random_restaurant] = rating
+
+    return restaurant_ratings
+
+
 # def give_user_choices():
 print "Welcome to the restaurant rater! How would you like to proceed?"
 restaurant_ratings = create_restaurant_ratings()
@@ -56,6 +71,7 @@ while True:
     print "\t1. See all the ratings (in alphabetical order)"
     print "\t2. Add a new restaurant (and rating it)"
     print "\t3. Quit"
+    print "\t4. Update the rating for a random restaurant."
 
     user_choice = int(raw_input(">>> "))
 
@@ -63,13 +79,15 @@ while True:
         break
     if user_choice == 1:
         print_sorted_ratings(restaurant_ratings)
-    else:
+    elif user_choice == 2:
         restaurant_ratings = input_new_restaurant_rating(restaurant_ratings)
+    else:
+        restaurant_ratings = update_random_restaurant(restaurant_ratings)
 
 print "Thank you for rating restaurants!"
 
 
-# def update_random_restaurant(restaurant_ratings):
+
 
 
 # give_user_choices()
